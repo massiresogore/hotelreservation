@@ -22,6 +22,20 @@ public class Room {
     @OneToMany(mappedBy="room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<BookedRoom> bookings;
 
+    public Room(Long id, String roomType, BigDecimal roomPrice, boolean isBooked, Blob photo, List<BookedRoom> bookings) {
+        this.id = id;
+        this.roomType = roomType;
+        this.roomPrice = roomPrice;
+        this.isBooked = isBooked;
+        this.photo = photo;
+        this.bookings = bookings;
+    } public Room(Long id, String roomType, BigDecimal roomPrice, boolean isBooked, List<BookedRoom> bookings) {
+        this.id = id;
+        this.roomType = roomType;
+        this.roomPrice = roomPrice;
+        this.isBooked = isBooked;
+        this.bookings = bookings;
+    }
 
     /**
      * On initialise le tableau des réservation lors de l'instantation de l'objet
@@ -92,5 +106,17 @@ public class Room {
 
     public void setBookings(List<BookedRoom> bookings) {
         this.bookings = bookings;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", roomType='" + roomType + '\'' +
+                ", roomPrice=" + roomPrice +
+                ", isBooked=" + isBooked +
+                ", photo=" + photo +
+                ", bookings=" + bookings +
+                '}';
     }
 }

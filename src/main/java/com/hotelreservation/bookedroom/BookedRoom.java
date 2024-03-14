@@ -35,6 +35,15 @@ public class BookedRoom {
     @JoinColumn(name = "room_id")
     private Room room;
 
+    /*****Constructeur****/
+    public BookedRoom(Long bookingId, LocalDate checkInDate, LocalDate checkOutDate, String bookingConfirmationCode) {
+        this.bookingId = bookingId;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.bookingConfirmationCode = bookingConfirmationCode;
+    }
+    /****endConstructeur****/
+
 
     /** commentaire de base
      * Increment a value by delta and return the new value.

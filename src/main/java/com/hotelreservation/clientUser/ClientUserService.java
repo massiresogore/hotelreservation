@@ -2,10 +2,14 @@ package com.hotelreservation.clientUser;
 
 import com.hotelreservation.role.Role;
 import com.hotelreservation.role.RoleRepository;
+import com.hotelreservation.system.exception.EmailNotFoundException;
 import com.hotelreservation.system.exception.UserAllReadyExistException;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 
+@Service
 public class ClientUserService {
     private final ClientUserRepository clientUserRepository;
     //private  PasswordEncoder passwordEncoder; //plutard pour la sécurité
@@ -32,6 +36,22 @@ public class ClientUserService {
 
 
         return clientUserRepository.save(user);
+    }
+
+    public List<ClientUser> findUsers() {
+        return clientUserRepository.findAll();
+    }
+
+    public void deleteUser(String email) {
+        this.clientUserRepository.findByEmail(email)
+                .orElseThrow(()-> new EmailNotFoundException(email));
+        clientUserRepository.deleteByEmail(email);
+    }
+    public ClientUser findUser(String email) {
+
+       return this.clientUserRepository.findByEmail(email)
+                .orElseThrow(()-> new EmailNotFoundException(email));
+
     }
 
 
